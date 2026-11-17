@@ -1,0 +1,14 @@
+# Maven
+/target/
+
+# IntelliJ IDEA / VS Code
+.idea/
+*.iml
+.vscode/
+
+# Sistema operacional
+.DS_Store
+Thumbs.db
+
+# Variáveis locais (não versionar senhas reais)
+.env

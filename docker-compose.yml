@@ -1,0 +1,42 @@
+services:
+  banco:
+    image: mysql:8.4
+    container_name: loja-web-mysql
+    environment:
+      MYSQL_ROOT_PASSWORD: root_dev_password
+      MYSQL_DATABASE: loja_web
+      MYSQL_USER: loja_user
+      MYSQL_PASSWORD: loja_pass
+      TZ: America/Araguaina
+    ports:
+      - "3306:3306"
+    volumes:
+      - dados-mysql:/var/lib/mysql
+      - ./database/loja_web.sql:/docker-entrypoint-initdb.d/01-loja_web.sql:ro
+    healthcheck:
+      test: ["CMD-SHELL", "mysqladmin ping -h 127.0.0.1 -uroot -p$$MYSQL_ROOT_PASSWORD --silent"]
+      interval: 5s
+      timeout: 5s
+      retries: 20
+    restart: unless-stopped
+
+  loja-web:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: loja-web-app
+    environment:
+      DB_HOST: banco
+      DB_PORT: 3306
+      DB_NAME: loja_web
+      DB_USER: loja_user
+      DB_PASSWORD: loja_pass
+    ports:
+      - "8080:8080"
+    depends_on:
+      banco:
+        condition: service_healthy
+    restart: unless-stopped
+
+volumes:
+  dados-mysql:

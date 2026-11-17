@@ -1,0 +1,29 @@
+{
+  "name": "Loja Web - Java 17 + MySQL + Tomcat 9",
+  "image": "mcr.microsoft.com/devcontainers/java:1-17-bookworm",
+  "features": {
+    "ghcr.io/devcontainers/features/docker-in-docker:2": {
+      "version": "latest",
+      "moby": true,
+      "installDockerCompose": true
+    }
+  },
+  "forwardPorts": [8080],
+  "portsAttributes": {
+    "8080": {
+      "label": "Loja Web (Tomcat 9 via Docker)",
+      "onAutoForward": "openBrowser"
+    }
+  },
+  "postCreateCommand": "docker compose up --build -d",
+  "postStartCommand": "docker compose up -d",
+  "customizations": {
+    "vscode": {
+      "extensions": [
+        "vscjava.vscode-java-pack",
+        "redhat.vscode-xml",
+        "ms-azuretools.vscode-docker"
+      ]
+    }
+  }
+}

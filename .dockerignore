@@ -1,0 +1,9 @@
+.git
+.github
+.devcontainer
+.idea
+.vscode
+target
+*.iml
+.DS_Store
+Thumbs.db
