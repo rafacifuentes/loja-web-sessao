@@ -1,29 +1,19 @@
 {
-  "name": "Loja Web - Java 17 + MySQL + Tomcat 9",
-  "image": "mcr.microsoft.com/devcontainers/java:1-17-bookworm",
+  "name": "Loja Web IFTO",
+  "image": "mcr.microsoft.com/devcontainers/universal:6-noble",
   "features": {
-    "ghcr.io/devcontainers/features/docker-in-docker:2": {
-      "version": "latest",
-      "moby": true,
-      "installDockerCompose": true
+    "ghcr.io/devcontainers/features/docker-in-docker:4": {},
+    "ghcr.io/devcontainers/features/java:1": {
+      "version": "17",
+      "installMaven": "true",
+      "installGradle": "false"
     }
   },
   "forwardPorts": [8080],
   "portsAttributes": {
     "8080": {
-      "label": "Loja Web (Tomcat 9 via Docker)",
+      "label": "Loja Web - Tomcat",
       "onAutoForward": "openBrowser"
-    }
-  },
-  "postCreateCommand": "docker compose up --build -d",
-  "postStartCommand": "docker compose up -d",
-  "customizations": {
-    "vscode": {
-      "extensions": [
-        "vscjava.vscode-java-pack",
-        "redhat.vscode-xml",
-        "ms-azuretools.vscode-docker"
-      ]
     }
   }
 }
